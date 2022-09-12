@@ -18,12 +18,15 @@ class StepperPage extends StatelessWidget {
       ),
       body: Container(
         padding: EdgeInsets.only(left: 24, top: 20),
-        child: StepTracker(steps: [
-          Steps(title: Text("Order Placed"), state: TrackerState.complete),
-          Steps(title: Text("Shipped"), state: TrackerState.complete),
-          Steps(title: Text("Out of delivery"), state: TrackerState.complete),
-          Steps(title: Text("Deliverd"), state: TrackerState.complete),
-        ]),
+        child: StepTracker(
+            stepTrackerType: StepTrackerType.indexedVertical,
+            steps: [
+              Steps(title: Text("Order Placed"), state: TrackerState.complete),
+              Steps(title: Text("Shipped"), state: TrackerState.complete),
+              Steps(
+                  title: Text("Out of delivery"), state: TrackerState.none),
+              Steps(title: Text("Deliverd"), state: TrackerState.none),
+            ]),
       ),
     );
   }
