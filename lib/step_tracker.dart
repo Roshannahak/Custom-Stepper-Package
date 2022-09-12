@@ -11,19 +11,23 @@ class StepTracker extends StatelessWidget {
       {Key? key,
       required this.steps,
       this.dotSize = 9,
-      this.stepHeight = 25.0});
+      this.stepHeight = 25.0,
+      this.selectedColor = Colors.green,
+      this.unSelectedColor = Colors.red});
 
   final List<Steps> steps;
   final double dotSize;
   final double stepHeight;
+  final Color selectedColor;
+  final Color unSelectedColor;
 
   Color dotColor(int index) {
     TrackerState state = steps[index].state;
     switch (state) {
       case TrackerState.complete:
-        return Colors.green;
+        return selectedColor;
       case TrackerState.disabled:
-        return Colors.red;
+        return unSelectedColor;
       case TrackerState.none:
         return Colors.grey;
     }
