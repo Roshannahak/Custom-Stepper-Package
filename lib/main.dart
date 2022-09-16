@@ -16,25 +16,22 @@ class StepperPage extends StatelessWidget {
         shadowColor: Colors.transparent,
         title: Text("Stepper Page"),
       ),
-      body: Container(
-        padding: EdgeInsets.only(left: 24, top: 20),
-        child: StepTracker(
-            stepTrackerType: StepTrackerType.indexedVertical,
-            steps: [
-              Steps(
-                  title: Text("Order Placed"),
-                  description:
-                      "your order is placed and confirmed by seller, your order is placed and confirmed by seller",
-                  state: TrackerState.complete),
-              Steps(
-                  title: Text("Shipped"),
-                  description:
-                      "your order is placed and confirmed by seller, your order is placed and confirmed by seller",
-                  state: TrackerState.complete),
-              Steps(title: Text("Out of delivery"), state: TrackerState.none),
-              Steps(title: Text("Deliverd"), state: TrackerState.none),
-            ]),
-      ),
+      body: StepTracker(
+          stepTrackerType: StepTrackerType.indexedHorizontal,
+          steps: [
+            Steps(
+                title: Text("Order Placed"),
+                description:
+                    "your order is placed and confirmed by seller, your order is placed and confirmed by seller",
+                state: TrackerState.complete),
+            Steps(
+                title: Text("Shipped"),
+                description:
+                    "your order is placed and confirmed by seller, your order is placed and confirmed by seller",
+                state: TrackerState.complete),
+            Steps(title: Text("Out of delivery"), state: TrackerState.none),
+            Steps(title: Text("Deliverd"), state: TrackerState.none),
+          ]),
     );
   }
 }
