@@ -17,12 +17,12 @@ class StepTracker extends StatelessWidget {
       required this.steps,
       this.dotSize = 9,
       this.circleSize = 24,
-      this.stepHeight = 25.0,
+      this.stepHeight = 30.0,
       this.selectedColor = Colors.green,
       this.unSelectedColor = Colors.red,
       this.stepTrackerType = StepTrackerType.dotVertical})
       : assert(dotSize <= 20),
-        assert(stepHeight >= 15);
+        assert(stepHeight >= 25);
 
   final List<Steps> steps;
   final double dotSize;
@@ -83,7 +83,23 @@ class StepTracker extends StatelessWidget {
         children: [
           _buildCircle(index),
           SizedBox(width: 10),
-          steps[index].title
+          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                steps[index].title,
+                steps[index].description != null
+                    ? Text(
+                        "${steps[index].description}",
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(fontSize: 12, color: Colors.grey),
+                      )
+                    : SizedBox(),
+              ],
+            ),
+          ),
         ],
       );
 
@@ -115,7 +131,27 @@ class StepTracker extends StatelessWidget {
   }
 
   Widget _buildDotVerticalHeader(int index) => Row(
-        children: [_buildDot(index), SizedBox(width: 10), steps[index].title],
+        children: [
+          _buildDot(index),
+          SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                steps[index].title,
+                steps[index].description != null
+                    ? Text(
+                        "${steps[index].description}",
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(fontSize: 12, color: Colors.grey),
+                      )
+                    : SizedBox(),
+              ],
+            ),
+          )
+        ],
       );
 
   Widget _buildDotVertical() => ListView.separated(
@@ -146,8 +182,13 @@ class StepTracker extends StatelessWidget {
 }
 
 class Steps {
-  const Steps({Key? key, required this.title, this.state = TrackerState.none});
+  const Steps(
+      {Key? key,
+      required this.title,
+      this.state = TrackerState.none,
+      this.description});
 
   final Text title;
   final TrackerState state;
+  final String? description;
 }
